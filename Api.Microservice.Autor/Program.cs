@@ -2,9 +2,13 @@
 
 using Api.Microservice.Autor.Aplicacion;
 using Api.Microservice.Autor.Persistencia;
+using gRPC.Autor.Serve;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
+using Grpc.Net.Client;
+using Grpc.Core;
+using gRPC.Autor.Serve;
 
 
 
@@ -16,6 +20,12 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddGrpcClient<AutorImg.AutorImgClient>(o =>
+{
+    o.Address = new Uri("https://localhost:7143");
+});
+
 
 //agregando los builder para la base de datos
 builder.Services.AddDbContext<ContextoAutor>(options =>
@@ -31,8 +41,8 @@ builder.Services.AddCors(options =>
         policy =>
         {
             policy.AllowAnyOrigin()
-                   .AllowAnyMethod()
-                   .AllowAnyHeader();
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
         });
 });
 
@@ -47,6 +57,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors();
 
 app.UseHttpsRedirection();
 

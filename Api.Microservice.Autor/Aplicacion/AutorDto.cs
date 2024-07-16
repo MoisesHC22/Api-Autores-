@@ -9,6 +9,7 @@
         public string Apellido { get; set; }
 
         public DateTime? FechaNacimiento { get; set; }
+        public string Imagen { get; set; }
 
         public string AutorLibroGuid { get; set; }
     }

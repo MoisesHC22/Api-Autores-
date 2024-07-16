@@ -9,6 +9,7 @@ namespace Api.Microservice.Autor.Aplicacion
         private string _apellido;
         private DateTime? _fechaNacimiento;
         public string _AutorLibroGuid;
+        public string _Imagen;
 
 
         public BuilderEjec setAutorLibroId(int autorLibroId)
@@ -42,6 +43,12 @@ namespace Api.Microservice.Autor.Aplicacion
             return this;
         }
 
+        public BuilderEjec setImagen(string Imagen)
+        { 
+           _Imagen = Imagen;
+            return this;
+        }
+
         public AutorLibro Build()
         {
             return new AutorLibro
@@ -62,7 +69,8 @@ namespace Api.Microservice.Autor.Aplicacion
                 Nombre = _nombre,
                 Apellido = _apellido,
                 FechaNacimiento = _fechaNacimiento,
-                AutorLibroGuid = _AutorLibroGuid
+                AutorLibroGuid = _AutorLibroGuid,
+                Imagen = _Imagen
             };
         }
 
